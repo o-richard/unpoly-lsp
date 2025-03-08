@@ -1,0 +1,1 @@
+Whether to set [feedback classes](https://unpoly.com/feedback-classes) during submission or while validating.

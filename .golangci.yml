@@ -1,0 +1,26 @@
+linters:
+  disable-all: true
+  enable:
+    - errcheck
+    - gocritic
+    - goimports
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - style
+      - performance
+      - experimental
+      - opinionated
+  goimports:
+    local-prefixes: github.com/o-richard/unpoly-lsp
+issues:
+  max-issues-per-linter: 0

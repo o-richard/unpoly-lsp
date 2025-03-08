@@ -1,0 +1,1 @@
+Whether to set [feedback classes](https://unpoly.com/feedback-classes) while loading content.
