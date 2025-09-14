@@ -116,6 +116,11 @@ var attributes map[string]*attribute = map[string]*attribute{
 		insertText: `up-history="${1|true,auto,false|}"`, insertTextFormat: snippetInsertTextFormat,
 		choices: []string{"true", "auto", "false"},
 	},
+	"up-fail-history": {
+		detail:     "Whether to update history when the server responds with an error code",
+		insertText: `up-fail-history="${1|true,auto,false|}"`, insertTextFormat: snippetInsertTextFormat,
+		choices: []string{"true", "auto", "false"},
+	},
 	"up-title": {
 		detail:     "An explicit document title to set before rendering",
 		insertText: `up-title="$1"`, insertTextFormat: snippetInsertTextFormat,
@@ -198,6 +203,10 @@ var attributes map[string]*attribute = map[string]*attribute{
 		detail:     "The layer in which to match and render the fragment",
 		insertText: `up-layer="$1"`, insertTextFormat: snippetInsertTextFormat,
 	},
+	"up-fail-layer": {
+		detail:     "The layer in which render if the server responds with an error code",
+		insertText: `up-fail-layer="$1"`, insertTextFormat: snippetInsertTextFormat,
+	},
 	"up-peel": {
 		detail:     "Whether to close overlays obstructing the updated layer when the fragment is updated",
 		insertText: `up-peel="${1|true,false|}"`, insertTextFormat: snippetInsertTextFormat,
@@ -210,6 +219,11 @@ var attributes map[string]*attribute = map[string]*attribute{
 	"up-scroll": {
 		detail:     "How to scroll after the new fragment was rendered",
 		insertText: `up-scroll="${1:|auto,smooth,instant|}"`, insertTextFormat: snippetInsertTextFormat,
+		choices: []string{"auto", "smooth", "instant"},
+	},
+	"up-fail-scroll": {
+		detail:     "How to scroll after the new fragment was rendered from a failed response",
+		insertText: `up-fail-scroll="${1:|auto,smooth,instant|}"`, insertTextFormat: snippetInsertTextFormat,
 		choices: []string{"auto", "smooth", "instant"},
 	},
 	"up-scroll-behavior": {
@@ -241,6 +255,14 @@ var attributes map[string]*attribute = map[string]*attribute{
 		detail:     "What to focus after the new fragment was rendered",
 		insertText: `up-focus="${1:auto}"`, insertTextFormat: snippetInsertTextFormat,
 	},
+	"up-fail-focus": {
+		detail:     "What to focus after the new fragment was rendered from a failed response",
+		insertText: `up-fail-focus="${1:auto}"`, insertTextFormat: snippetInsertTextFormat,
+	},
+	"up-focus-visible": {
+		detail:     "Whether the focused element should have a visible focus ring",
+		insertText: `up-focus-visible="${1:auto}"`, insertTextFormat: snippetInsertTextFormat,
+	},
 	"up-save-focus": {
 		detail:     "Whether to save focus-related state before updating the fragment",
 		insertText: `up-save-focus`, insertTextFormat: plainTextInsertTextFormat,
@@ -264,6 +286,14 @@ var attributes map[string]*attribute = map[string]*attribute{
 	"up-disable": {
 		detail:     "Disables form controls",
 		insertText: `up-disable="${1:true}"`, insertTextFormat: plainTextInsertTextFormat,
+	},
+	"up-disable-for": {
+		detail:     "Disables this element while an input field with [up-switch] has one of the given values",
+		insertText: `up-disable-for="$1"`, insertTextFormat: snippetInsertTextFormat,
+	},
+	"up-enable-for": {
+		detail:     "Enables this element while an input field with [up-switch] has one of the given values",
+		insertText: `up-enable-for="$1"`, insertTextFormat: snippetInsertTextFormat,
 	},
 	"up-feedback": {
 		detail:     "Whether to set feedback classes while loading content",
@@ -380,9 +410,33 @@ var attributes map[string]*attribute = map[string]*attribute{
 		detail:     "Show or hide elements when a form field is set to a given value",
 		insertText: `up-switch="$1"`, insertTextFormat: snippetInsertTextFormat,
 	},
+	"up-switch-region": {
+		detail:     "A selector for the region in which elements are switched.",
+		insertText: `up-switch-region="$1"`, insertTextFormat: snippetInsertTextFormat,
+	},
 	"up-validate": {
 		detail:     "Renders a new form state when a field changes, to show validation errors or update dependent fields",
 		insertText: `up-validate`, insertTextFormat: plainTextInsertTextFormat,
+	},
+	"up-validate-url": {
+		detail:     "The URL to which to submit the validation request. By default Unpoly will use the form's [action] attribute",
+		insertText: `up-validate-url="$1"`, insertTextFormat: snippetInsertTextFormat,
+	},
+	"up-validate-method": {
+		detail:     "The method to use for submitting the validation request. By default Unpoly will use the form's [method] attribute",
+		insertText: `up-validate-method="$1"`, insertTextFormat: snippetInsertTextFormat,
+	},
+	"up-validate-params": {
+		detail:     "Additional Form parameters that should be sent as the request's query string or payload",
+		insertText: `up-validate-params="$1"`, insertTextFormat: snippetInsertTextFormat,
+	},
+	"up-validate-headers": {
+		detail:     "A relaxed JSON object with additional request headers",
+		insertText: `up-validate-headers="$1"`, insertTextFormat: snippetInsertTextFormat,
+	},
+	"up-validate-batch": {
+		detail:     "Whether to consolidate multiple validations into a single request",
+		insertText: `up-validate-batch="${1|true,false|}"`, insertTextFormat: snippetInsertTextFormat,
 	},
 	"up-watch": {
 		detail:     "Watches form fields and runs a callback when a value changes",
@@ -395,6 +449,20 @@ var attributes map[string]*attribute = map[string]*attribute{
 	"up-close": {
 		detail:     "When this element is clicked, closes a currently open overlay",
 		insertText: `up-close`, insertTextFormat: plainTextInsertTextFormat, isDepreciated: true,
+	},
+	"up-close-animation": {
+		detail:           "The name of the closing animation",
+		insertText:       `up-close-animation="${1|fade-in,fade-out,move-to-top,move-from-top,move-to-bottom,move-from-bottom,move-to-left,move-from-left,move-to-right,move-from-right,none|}"`,
+		insertTextFormat: snippetInsertTextFormat,
+		choices:          []string{"fade-in", "fade-out", "move-to-top", "move-from-top", "move-to-bottom", "move-from-bottom", "move-to-left", "move-from-left", "move-to-right", "move-from-right", "none"},
+	},
+	"up-close-easing": {
+		detail:     "The timing function that controls the closing animation's acceleration",
+		insertText: `up-close-easing="$1"`, insertTextFormat: snippetInsertTextFormat,
+	},
+	"up-close-duration": {
+		detail:     "The duration of the closing animation in milliseconds",
+		insertText: `up-close-duration="$1"`, insertTextFormat: snippetInsertTextFormat,
 	},
 	"up-dismiss": {
 		detail:     "The overlay's dismissal value as a relaxed JSON value",

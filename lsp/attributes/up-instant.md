@@ -17,5 +17,4 @@ To [follow all links on `mousedown`](https://unpoly.com/handling-everything#foll
 Links with `[up-instant]` can still be activated with the keyboard.
 
 With `[up-instant]` users can no longer cancel a click by dragging the pressed mouse away from the link.
-However, for navigation actions this isn't required. E.g. many operation systems switch tabs on `mousedown`
-instead of `click`.
+However, for navigation actions this isn't required. E.g. many operation systems switch tabs on `mousedown` instead of `click`.

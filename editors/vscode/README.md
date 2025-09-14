@@ -1,6 +1,6 @@
 # unpoly-lsp
 
-A Language Server Protocol (LSP) implementation for [Unpoly.js Version 3.10](https://unpoly.com/).
+A Language Server Protocol (LSP) implementation for [Unpoly.js Version 3.11](https://unpoly.com/).
 
 ## Demo
 
@@ -23,7 +23,7 @@ A Language Server Protocol (LSP) implementation for [Unpoly.js Version 3.10](htt
 ### Prerequisites
 
 - VS Code **1.97.0+**
-- Install Go **1.24+**.
+- Install Go **1.25+**.
 - Clone the repository.
 - Run `go build -o unpoly-lsp .` and ensure `unpoly-lsp` is discoverable in your system path.
 

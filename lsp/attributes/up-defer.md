@@ -1,4 +1,4 @@
-❗[EXPERIMENTAL] When to load and render the deferred content.
+When to load and render the deferred content.
 
 When set to `'insert'` (the default), the deferred content will load immediatedly when the `[up-defer]` element is inserted into the DOM.
 

@@ -1,26 +1,20 @@
+version: "2"
 linters:
-  disable-all: true
-  enable:
-    - errcheck
-    - gocritic
-    - goimports
-    - gosec
-    - gosimple
-    - govet
-    - ineffassign
-    - staticcheck
-    - unused
-linters-settings:
-  errcheck:
-    check-type-assertions: true
-  gocritic:
-    enabled-tags:
-      - diagnostic
-      - style
-      - performance
-      - experimental
-      - opinionated
-  goimports:
-    local-prefixes: github.com/o-richard/unpoly-lsp
+  default: standard
+  settings:
+    errcheck:
+      check-type-assertions: true
 issues:
   max-issues-per-linter: 0
+  max-same-issues: 0
+  fix: true
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/o-richard/unpoly-lsp
+run:
+  allow-parallel-runners: true

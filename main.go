@@ -22,7 +22,7 @@ func main() {
 		data := scanner.Bytes()
 		response, shouldExit := lsp.HandleRequestMessage(data, state)
 		if response != "" {
-			os.Stdout.WriteString(response)
+			_, _ = os.Stdout.WriteString(response)
 		}
 		if shouldExit {
 			break
